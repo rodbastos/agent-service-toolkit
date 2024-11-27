@@ -1,0 +1,245 @@
+Cluster,Label,Resumo,Abs média,Temp Média,Diversidade semântica,Popularidade (% de User_Id únicos)
+C0,Previsibilidade e Continuidade do Negócio,"O Cluster C0 enfoca os benefícios do modelo QTK em termos de previsibilidade financeira e continuidade operacional. A característica central é a abordagem sistêmica do negócio, onde as obras não são vistas isoladamente, mas como parte de um todo maior, permitindo uma visão mais sustentável e previsível das operações. Esta previsibilidade se manifesta tanto no fluxo de trabalho quanto nos aspectos financeiros, com um modelo de compartilhamento de riscos que beneficia tanto a contratante quanto as empresas contratadas.
+
+Um aspecto fundamental destacado nas narrativas é o impacto positivo desta previsibilidade na gestão do negócio e no planejamento de longo prazo. O modelo permite que as empresas façam investimentos programados, tenham maior visibilidade sobre o fluxo de trabalho futuro e operem com maior segurança financeira, uma vez que o sistema de pagamento é mais previsível e os riscos são compartilhados de maneira mais equilibrada.
+Principais pontos do cluster:
+
+- Visão sistêmica das obras como parte de um todo maior
+- Previsibilidade de pagamentos e fluxo de trabalho
+- Compartilhamento equilibrado de riscos entre as partes
+- Capacidade de planejamento e investimentos de longo prazo
+- Maior segurança na continuidade das operações
+- Viabilidade econômica através da visão integrada dos projetos
+- Modelo de contratação mais justo e economicamente eficiente
+- Redução da preocupação com a descontinuidade das obras",3.25,-0.94,61.17,47%
+C1,Desafios Operacionais do QTK,"O Cluster C1 (Desafios Operacionais do QTK) revela os diversos desafios e complexidades enfrentados na implementação e operação do sistema QTK. As narrativas mostram uma transição significativa de um modelo tradicional para um novo sistema que, embora ofereça benefícios substanciais em termos de eficiência e produtividade, apresenta uma curva de aprendizado acentuada e diversos desafios operacionais. Um ponto crítico destacado é a falta de documentação adequada e de um repositório centralizado para as versões do sistema, além da necessidade de frequentes atualizações que impactam múltiplos documentos e processos.
+
+O cluster também evidencia uma dicotomia interessante: enquanto há relatos de ganhos significativos de eficiência (como redução de 11% nos custos e aumento de 26% na produção), existem desafios importantes na adaptação e aceitação do sistema. Há uma necessidade clara de melhor integração entre os setores de projetos e obras, bem como de um plano mais estruturado para capacitação de novos usuários e projetistas. As narrativas também apontam para a necessidade de expansão do escopo do QTK para incluir outros elementos da obra, como usinas elevatórias e tubulações de recalque.
+Principais pontos do cluster:
+
+- Necessidade de manual e documentação adequada do sistema
+- Complexidade nas atualizações e impacto em múltiplos documentos
+- Falta de repositório centralizado para versões
+- Desafios na integração entre setores (especialmente projetos e obras)
+- Curva de aprendizado acentuada para novos usuários
+- Ganhos comprovados de eficiência e produtividade
+- Necessidade de estruturação melhor do fluxo de mudanças
+- Demanda por expansão do escopo para incluir outros elementos da obra
+- Desafios na capacitação e treinamento de novos usuários
+- Resistência inicial de alguns empreiteiros ao novo sistema
+- Necessidade de melhor planejamento para implementação de novas versões
+- Benefícios claros em termos de agilidade e controle financeiro",2.62,0.31,50.98,65%
+C2,Transição do Sistema Manual para Digital,"O Cluster C2 retrata a complexa transição de um sistema manual para um ambiente digital, destacando tanto os avanços significativos quanto os desafios operacionais desta mudança. As narrativas demonstram uma clara evolução em termos de eficiência - o que antes levava dias ou semanas para ser processado agora pode ser realizado em minutos, especialmente quando se trata de medições e cálculos. No entanto, esta transição não está ocorrendo sem obstáculos, principalmente relacionados à adaptação dos usuários e à necessidade de ajustes nos processos de exportação e manipulação de dados.
+
+Um aspecto marcante nas narrativas é a coexistência dos sistemas antigo e novo, criando desafios adicionais de adaptação cultural e operacional. Problemas específicos são relatados em relação à interface entre diferentes sistemas (BI, planilhas, SAP), incluindo questões de formatação de dados, nomenclatura e necessidade de ajustes manuais. Há também uma preocupação clara com a usabilidade do sistema para os trabalhadores em campo, que enfrentam dificuldades com unidades de medida e entrada de dados.
+Principais pontos do cluster:
+
+- Redução significativa no tempo de processamento de medições (de dias para minutos)
+- Desafios na adaptação dos usuários ao novo sistema digital
+- Problemas de compatibilidade e formatação entre diferentes sistemas
+- Necessidade de ajustes manuais em exportações e importações de dados
+- Dificuldades específicas dos trabalhadores em campo com unidades de medida
+- Coexistência de sistemas antigos e novos gerando complexidade adicional
+- Necessidade de materiais de treinamento mais intuitivos e acessíveis
+- Questões de persistência de dados e backup de informações
+- Simplificação de processos anteriormente complexos
+- Maior agilidade na tomada de decisões e análise de custos
+- Desafios com mudanças de nomenclatura e padronização
+- Necessidade de melhor integração entre diferentes ferramentas digitais",2.2,0.15,54.05,41%
+C3,Fluxo Operacional de Medições,"O Cluster C3 revela os desafios e características do fluxo operacional de medições no sistema QTK, com foco especial nos processos diários de registro e controle. As narrativas mostram uma dicotomia interessante: enquanto o uso básico da planilha para medições é descrito como relativamente simples e tranquilo, há uma clara necessidade de melhor estruturação do processo de treinamento e documentação. Um ponto crítico destacado é a vulnerabilidade do sistema atual, ainda baseado em planilhas, onde há preocupação com possíveis alterações não autorizadas e a necessidade de manter cópias de segurança para comparação.
+
+O cluster também evidencia desafios significativos relacionados à temporalidade das atualizações e ao fluxo de informações. Há uma demanda clara por melhor organização do cronograma de atualizações do sistema, especialmente para evitar impactos no fechamento mensal das medições. As narrativas também apontam para a necessidade de diferentes formatos de treinamento - incluindo vídeos e documentação escrita - além de uma plataforma mais robusta e centralizada para alimentação de dados. A questão da integração entre diferentes ferramentas (aplicativo, planilha, sistema Moving) também aparece como um ponto de atenção.
+
+Principais pontos do cluster:
+- Necessidade de estruturação do manuseio diário do sistema
+- Vulnerabilidade do sistema atual baseado em planilhas
+- Demanda por múltiplos formatos de treinamento (vídeos e documentação escrita)
+- Impacto das atualizações de versão no processo de medição
+- Facilidade relativa no uso básico da planilha
+- Desafios na integração entre diferentes ferramentas
+- Necessidade de plataforma centralizada para dados
+- Importância do cumprimento de prazos para lançamentos
+- Questões de governança e controle de acesso
+- Definição clara de critérios de avaliação
+- Necessidade de melhor estruturação do processo de treinamento
+- Demanda por documentação mais acessível e consultável",2.72,0.64,44.34,59%
+C4,Complexidade da Planilha QTK,"A complexidade da planilha QTK é caracterizada principalmente por sua extensão e pela dificuldade em explicar sua metodologia de cálculo de preços unitários. A ferramenta é descrita como intimidante no primeiro contato, estendendo-se até a coluna JZ e contendo múltiplas linhas de informação. Um ponto crítico é a dificuldade em explicar que o sistema de preço unitário difere do convencional, o que gera confusão especialmente para empresas menores sem estrutura técnica robusta - como evidenciado pelo caso onde mesmo uma empresa com quatro engenheiros precisou de três horas para compreender a ferramenta.
+
+A complexidade da planilha tem levado a comportamentos preocupantes, como usuários que evitam analisar os cálculos detalhadamente e vão direto à planilha resumo para ver apenas o preço médio da obra. Embora existam tentativas de melhoria, como a implementação de ábacos para facilitar a visualização em matriz, a natureza aberta e não bloqueada da planilha - ainda que vise transparência - gera inseguranças devido ao risco de alterações acidentais nas fórmulas, criando dependência do suporte técnico para correções.
+
+Pontos principais:
+- Desafios estruturais:
+  * Extensão excessiva (até coluna JZ)
+  * Múltiplas linhas e colunas de informação
+  * Metodologia de cálculo diferente do convencional
+  * Complexidade na explicação do preço unitário
+
+- Impactos na utilização:
+  * Intimidação inicial dos usuários
+  * Análises superficiais focando apenas no preço final
+  * Dificuldade particular para empresas sem equipe técnica robusta
+  * Dependência de suporte técnico para correções
+
+- Características do sistema:
+  * Planilha aberta e não bloqueada
+  * Inclusão de ábacos para facilitar visualização
+  * Necessidade de compreensão por partes
+  * Nova funcionalidade de controle de estoque gerando dúvidas",2.54,1.69,68.67,47%
+C5,Resistência do Mercado Local,"O cluster C5 revela uma dinâmica complexa no mercado local, caracterizada inicialmente por forte resistência das empresas tradicionais ao novo modelo de contratação. As empresas locais, especialmente aquelas acostumadas com contratações públicas tradicionais, demonstram ceticismo quanto à viabilidade do novo sistema. Este cenário é particularmente desafiador com empresas de menor porte, que apresentam maior dificuldade em compreender e adaptar-se ao processo, resultando em uma situação onde a maioria das novas adesões vem de empresas de fora da região.
+
+No entanto, observa-se uma evolução positiva neste cenário, com o modelo começando a ganhar mais corpo e atrações. Um ""problema bom"" emerge com múltiplas empresas demonstrando interesse em aderir ao modelo, incluindo novos players no setor de saneamento. Esta transição traz novos desafios, como a necessidade de desenvolver critérios objetivos de seleção que não se baseiem apenas em preço, e a gestão de um ciclo contínuo de contratações que deve se estender por todo o projeto.
+
+Pontos principais:
+- Desafios iniciais:
+  * Forte resistência das empresas locais tradicionais
+  * Dificuldade particular com empresas de menor porte
+  * Insegurança quanto ao novo modelo de remuneração
+  * Mercado local fechado e resistente a mudanças
+
+- Evolução do cenário:
+  * Aumento de adesões, principalmente de empresas externas
+  * Surgimento de novas empresas no setor de saneamento
+  * Desenvolvimento de parcerias entre contratados
+  * Transição de competição por preço para outros critérios
+
+- Novos desafios:
+  * Necessidade de critérios objetivos para seleção
+  * Gestão do ciclo contínuo de contratações
+  * Mapeamento e desenvolvimento de fornecedores
+  * Volume significativo de obras versus disponibilidade de empresas",3.45,1.2,60.85,53%
+C6,Multiplicadores como Agentes de Mudança,"O Cluster C6 revela uma evolução significativa no modelo de disseminação do conhecimento, partindo de uma situação inicial de alta dependência do Rafael (líder técnico) para um sistema mais distribuído de multiplicadores. Esta transição demonstrou-se essencial para a escalabilidade do projeto, pois inicialmente havia uma sobrecarga notável em uma única pessoa. A implementação do sistema de multiplicadores e pontos focais trouxe melhorias significativas na organização e direcionamento do processo, substituindo um início confuso onde as instruções eram passadas de forma simplista (""ó, tá aqui a planilha, a obra inicia tal dia"").
+
+Um aspecto crucial destacado é a qualidade e o engajamento dos multiplicadores escolhidos, com casos relatados onde foi necessário substituir multiplicadores que não demonstravam o nível necessário de comprometimento. O sucesso do modelo colaborativo é evidenciado por exemplos concretos de contribuições, como a criação de manuais de uso por participantes e a identificação de melhorias no sistema de remuneração. Esta abordagem colaborativa não só distribui o conhecimento mais eficientemente, mas também permite que diferentes perspectivas contribuam para o aperfeiçoamento contínuo do sistema.
+
+Pontos principais:
+- Evolução do modelo:
+  * Transição de centralização individual para sistema distribuído
+  * Implementação bem-sucedida de multiplicadores e pontos focais
+  * Maior organização e direcionamento no processo
+  * Redução da sobrecarga no líder técnico
+
+- Aspectos colaborativos:
+  * Criação espontânea de materiais de suporte
+  * Contribuições ativas para melhorias no sistema
+  * Aumento do compartilhamento de conhecimento
+  * Maior engajamento dos participantes
+
+- Aprendizados e ajustes:
+  * Importância do perfil adequado dos multiplicadores
+  * Necessidade de substituição de multiplicadores não engajados
+  * Valor da simplificação na transmissão do conhecimento
+  * Benefícios da descentralização do conhecimento",3.16,-1.0,60.45,53%
+C7,Capacitação e Disseminação do Modelo,"O Cluster C7 evidencia os desafios e estratégias na capacitação e disseminação do modelo QTK, revelando uma transição necessária de um processo inicial intensivo (com múltiplas reuniões por empresa) para um formato mais eficiente e escalável. Existe um esforço proativo da equipe em oferecer suporte contínuo, porém há uma necessidade clara de otimizar o processo de capacitação, buscando reduzir o ciclo de aprendizagem de um ano para um formato mais conciso e efetivo, idealmente com apenas uma ou duas reuniões por empresa. O modelo tem se mostrado eficiente quando bem implementado, com casos reportados de aumento de 50% na produtividade da mão de obra.
+
+Uma evolução significativa na abordagem de capacitação é percebida, com foco na necessidade de formalização e estruturação do processo. Há um reconhecimento de que a mensagem precisa ser adaptada para enfatizar os benefícios diretos para as empresas, em vez de focar nos ganhos para a contratante. A estratégia inclui a identificação de encarregados com perfil mais proativo e proximidade com tecnologia para atuar como multiplicadores, bem como a necessidade de padronização do modelo entre diferentes regiões, garantindo consistência na implementação.
+
+Pontos principais:
+- Desafios de capacitação:
+  * Necessidade de reduzir o ciclo de aprendizagem
+  * Demanda por escalabilidade no processo
+  * Balanceamento entre suporte intensivo e eficiência
+  * Adaptação a diferentes perfis de empresas
+
+- Estratégias de implementação:
+  * Foco em encarregados com perfil proativo
+  * Busca por padronização entre regiões
+  * Transição para maior formalidade no processo
+  * Adaptação da mensagem para benefícios diretos
+
+- Resultados e evolução:
+  * Aumento significativo de produtividade reportado
+  * Maior aceitação do modelo ao longo do tempo
+  * Necessidade de estruturação mais formal
+  * Desenvolvimento de processo mais transparente e escalável",3.51,0.03,49.28,47%
+C8,Evolução e Controle de Versões,"O Cluster C8 revela um processo evolutivo significativo do sistema QTK, que já passou por múltiplas versões (da V13 até V16), com previsão de migração para um sistema próprio na V17, saindo do Excel. Esta evolução trouxe melhorias significativas, como ajustes na remuneração e novos controles de materiais, demonstrando um compromisso com o aperfeiçoamento contínuo. No entanto, o processo de atualização e disseminação das versões apresenta desafios importantes, especialmente na governança e comunicação, com atualizações sendo compartilhadas informalmente via WhatsApp e e-mail, sem um processo estruturado de gestão de versões.
+
+Um ponto crítico identificado é a dependência das reuniões semanais conduzidas pelo Rafael como principal fonte de informação sobre atualizações e mudanças. A falta de documentação formal, notas de versão acessíveis e um repositório centralizado de informações dificulta o acesso ao conhecimento para aqueles que não podem participar das reuniões. Além disso, o ritmo das atualizações gera pressão operacional, com equipes tendo que atualizar rapidamente todos os projetos não contratados para novas versões, muitas vezes sem um plano de ação adequado.
+
+Pontos principais:
+- Evolução do sistema:
+  * Transição da V13 para V16, com previsão de migração para sistema próprio
+  * Melhorias incrementais em funcionalidades e controles
+  * Ajustes na remuneração e metodologia
+  * Desenvolvimento contínuo baseado no feedback dos usuários
+
+- Desafios de governança:
+  * Processo informal de distribuição de atualizações
+  * Falta de documentação estruturada
+  * Dependência excessiva de reuniões semanais
+  * Ausência de repositório centralizado de informações
+
+- Aspectos críticos:
+  * Necessidade de melhor gestão de versões
+  * Pressão operacional para atualização de projetos
+  * Dificuldade de acesso à informação
+  * Falta de planejamento nas transições de versão",3.0,0.85,62.83,65%
+C9,Compreensão do Propósito do Modelo,"O Cluster C9 revela uma significativa lacuna na compreensão profunda do modelo QTK entre seus usuários. Existe uma tendência de pessoas utilizarem o sistema por obrigação, sem realmente entenderem sua finalidade e potencial completo. Esta situação é agravada por uma cultura organizacional que, vinda de um ambiente público, muitas vezes inibe questionamentos e dificulta o aprendizado aberto.
+
+O desafio é amplificado pela complexidade do modelo e pela dificuldade em conciliar o tempo necessário para aprendizagem com as demandas operacionais diárias. Há uma clara distinção entre simplesmente usar o modelo e verdadeiramente compreender seu propósito, com muitas empresas operando o sistema sem um entendimento adequado de sua fundamentação.
+
+Principais pontos identificados:
+
+- Uso mecânico vs. compreensão: Muitos usuários operam o sistema por obrigação, sem entender seu propósito maior
+- Barreira cultural: Existe receio em fazer perguntas básicas, com medo de julgamentos
+- Limitação de tempo: Dificuldade em conciliar o aprendizado do modelo com as atividades diárias
+- Resistência ao questionamento: Pessoas evitam fazer perguntas mesmo quando têm dúvidas fundamentais
+- Insegurança operacional: Usuários demonstram falta de confiança ao operar o sistema
+- Necessidade de propósito: Forte demanda por entender não apenas o ""como"", mas também o ""porquê"" das ações
+- Lacuna de autonomia: Usuários sentem falta de poder para fazer ajustes no modelo
+- Variação na qualidade dos questionamentos: Alguns são construtivos para melhorias, outros são considerados ""maldosos""",3.53,1.53,53.54,41%
+C10,Imprevisibilidade e Custos,"O Cluster C10 evidencia uma série de desafios relacionados à imprevisibilidade de custos e execução das obras, revelando uma discrepância significativa entre o planejamento inicial e a realidade da execução. Os dados mostram que existe uma tendência sistemática de subestimação dos custos das obras, com projetos frequentemente ultrapassando os orçamentos previstos inicialmente. Esta situação é agravada por variáveis técnicas difíceis de quantificar previamente, como espessura de pavimento e porcentagem de reutilização de solo.
+
+O impacto financeiro dessas imprevisibilidades se manifesta de diversas formas, desde gastos extras com mobilização e desmobilização até custos adicionais causados por atrasos em projetos de elevatórios. Problemas como atrasos na atualização de preços SINAPI e erros de medição também contribuem para a complexidade do cenário, gerando insegurança tanto para a gestão quanto para os empreiteiros envolvidos nos projetos.
+
+Principais pontos identificados:
+
+- Desvios orçamentários: Obras frequentemente excedem os custos inicialmente previstos
+- Variáveis técnicas imprevisíveis: Dificuldade em prever com precisão aspectos como espessura de pavimento e reaproveitamento de solo
+- Atrasos em atualizações: Demora na atualização de preços SINAPI afetando o fluxo financeiro
+- Erros de medição: Casos de erros significativos gerando pagamentos indevidos
+- Complexidade logística: Dificuldades com disponibilidade e volume de jazidas
+- Gestão multitarefa: Desafio de gerenciar simultaneamente diferentes tipos de obras
+- Retrabalho: Custos adicionais não previstos com alterações e correções
+- Interdependência de projetos: Atrasos em componentes específicos (como elevatórios) impactando todo o cronograma",2.67,1.5,68.69,47%
+C11,Gestão de DMTs e Reequilíbrios,"O Cluster C11 revela um panorama complexo relacionado à gestão de Distâncias Médias de Transporte (DMTs) e processos de reequilíbrio contratual, apresentando tanto inovações positivas quanto desafios operacionais significativos. O modelo implementa mecanismos automáticos de correção e reequilíbrio, eliminando a necessidade de pleitos e aditivos tradicionais, além de oferecer incentivos como leasing interno e bonificações por antecipação. No entanto, persistem questões práticas relacionadas à gestão de DMTs fixas em contrato que nem sempre correspondem à realidade da execução, bem como desafios na gestão de notas fiscais e descontos.
+
+As narrativas indicam uma transição em andamento de um modelo tradicional para um mais dinâmico e automatizado, porém com pontos de fricção significativos na implementação. Questões como divergências entre formas de pagamento (percentual versus medição por furos), disponibilidade de jazidas, e complexidades tributárias municipais demonstram a necessidade de maior padronização e clareza nos processos.
+
+Principais pontos identificados:
+
+- Automação de reequilíbrios: Sistema implementa correções automáticas, reduzindo necessidade de aditivos
+- Incentivos financeiros: Existência de mecanismos de fomento como leasing e bonificações
+- Desafios com DMTs: Divergência entre DMTs contratuais e realidade da execução
+- Gestão de notas fiscais: Dificuldades com volume inicial de notas e definição de percentuais de desconto
+- Complexidade tributária: Necessidade de consulta a códigos tributários municipais
+- Rastreabilidade de cotações: Falta de referências claras sobre origem dos preços e cotações
+- Subcontratação: Divergências entre modelos de pagamento para contratadas e subcontratadas
+- Correção de erros: Casos de reajustes equivocados gerando necessidade de ressarcimentos significativos",2.56,0.56,72.08,53%
+C12,Desafios da Fiscalização e Controle,"O Cluster C12 evidencia uma série de desafios críticos relacionados à fiscalização e controle das obras, com destaque para problemas estruturais de recursos humanos e processos de comunicação. Um dos pontos mais críticos é a sobrecarga dos fiscais, que precisam supervisionar um volume crescente de obras com uma equipe reduzida, tornando impossível a presença constante em todos os pontos necessários. Esta situação é agravada pela falta de padronização entre as regionais, resultando em decisões divergentes e dificultando a gestão consistente dos projetos.
+
+A complexidade do sistema de controle é amplificada por desafios na gestão documental e no fluxo de informações entre diferentes áreas (projetos, obras e contratos). Problemas recorrentes incluem erros de preenchimento, falhas na entrega de materiais, documentação inadequada e falta de clareza nos processos de comunicação formal. A rotatividade das equipes também contribui para a repetição de erros, já que novos colaboradores frequentemente cometem as mesmas falhas que seus antecessores.
+
+Principais pontos identificados:
+
+- Sobrecarga operacional: Número insuficiente de fiscais para o volume de obras
+- Inconsistência entre regionais: Falta de padronização nas decisões entre diferentes regiões
+- Problemas de comunicação: Fluxo de informações deficiente entre diferentes áreas
+- Gestão de materiais: Dificuldades no controle de entregas e notas fiscais
+- Documentação inadequada: Falhas na qualidade dos registros fotográficos e documentais
+- Rotatividade de pessoal: Impacto na continuidade e qualidade dos processos
+- Retrabalho frequente: Necessidade de revisões e correções constantes
+- Falta de clareza processual: Indefinição sobre responsabilidades e procedimentos padrão",2.96,1.74,56.42,76%
+C13,Responsabilidades e Papéis Organizacionais,"O Cluster C13 revela uma complexa teia de desafios relacionados à definição e execução de papéis e responsabilidades na organização, caracterizada por uma significativa indefinição de atribuições e uma cultura organizacional em transição. As narrativas indicam uma tensão entre a necessidade de mudança e a resistência cultural existente, onde a falta de clareza nas responsabilidades gera insegurança e ineficiências operacionais. Há uma evidente preocupação com a gestão de riscos e erros, tanto intencionais quanto não intencionais, além da necessidade de estabelecer estruturas mais robustas de governança e auditoria.
+
+O cluster demonstra uma organização em processo de transformação, lutando para equilibrar a flexibilidade necessária para inovação com a necessidade de controles mais estruturados. Existe uma consciência clara da necessidade de mudança, mas também um reconhecimento das dificuldades em implementá-la de forma efetiva, especialmente considerando aspectos culturais e estruturais existentes.
+
+Principais pontos identificados:
+
+- Indefinição de autoridade: Falta de clareza sobre quem tem poder decisório final
+- Cultura do medo: Resistência a assumir responsabilidades por medo de erros
+- Gestão de riscos: Dificuldade em equilibrar controle e flexibilidade operacional
+- Sobrecarga gerencial: Gestores divididos entre execução e capacitação de equipes
+- Necessidade de auditoria: Ausência de uma terceira linha de defesa na engenharia
+- Gestão de mudança: Desafios na implementação de transformações culturais
+- Planejamento sucessório: Preocupação com crescimento e rotatividade futura
+- Transparência processual: Necessidade de documentação clara de responsabilidades",3.5,1.58,55.54,47%

@@ -1,7 +1,8 @@
 import json
 import os
+import logging
 from collections.abc import AsyncGenerator, Generator
-from typing import Any
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -13,7 +14,7 @@ class AgentClient:
 
     def __init__(
         self,
-        base_url: str = "http://localhost",
+        base_url: str = os.getenv("AGENT_URL", "http://localhost"),
         agent: str = "research-assistant",
         timeout: float | None = None,
     ) -> None:
@@ -22,6 +23,7 @@ class AgentClient:
 
         Args:
             base_url (str): The base URL of the agent service.
+            agent (str): The agent name.
         """
         self.base_url = base_url
         self.agent = agent
@@ -162,48 +164,76 @@ class AgentClient:
     async def astream(
         self,
         message: str,
-        model: str | None = None,
-        thread_id: str | None = None,
+        model: Optional[str] = None,
         stream_tokens: bool = True,
-    ) -> AsyncGenerator[ChatMessage | str, None]:
+        thread_id: Optional[str] = None,
+    ) -> AsyncGenerator[Union[str, ChatMessage], None]:
         """
-        Stream the agent's response asynchronously.
-
-        Each intermediate message of the agent process is yielded as an AnyMessage.
-        If stream_tokens is True (the default value), the response will also yield
-        content tokens from streaming modelsas they are generated.
-
-        Args:
-            message (str): The message to send to the agent
-            model (str, optional): LLM model to use for the agent
-            thread_id (str, optional): Thread ID for continuing a conversation
-            stream_tokens (bool, optional): Stream tokens as they are generated
-                Default: True
-
-        Returns:
-            AsyncGenerator[ChatMessage | str, None]: The response from the agent
+        Stream responses from the agent service.
         """
-        request = StreamInput(message=message, stream_tokens=stream_tokens)
-        if thread_id:
-            request.thread_id = thread_id
-        if model:
-            request.model = model
-        async with httpx.AsyncClient() as client:
-            async with client.stream(
-                "POST",
-                f"{self.base_url}/{self.agent}/stream",
-                json=request.model_dump(),
-                headers=self._headers,
-                timeout=self.timeout,
-            ) as response:
-                if response.status_code != 200:
-                    raise Exception(f"Error: {response.status_code} - {response.text}")
-                async for line in response.aiter_lines():
-                    if line.strip():
-                        parsed = self._parse_stream_line(line)
-                        if parsed is None:
-                            break
-                        yield parsed
+        try:
+            stream_input = StreamInput(
+                message=message,
+                model=model,
+                stream_tokens=stream_tokens,
+                thread_id=thread_id,
+            )
+
+            async with httpx.AsyncClient() as client:
+                async with client.stream(
+                    "POST",
+                    f"{self.base_url}/{self.agent}/stream",
+                    json=stream_input.model_dump(),
+                    headers=self._headers,
+                ) as response:
+                    if response.status_code != 200:
+                        error_detail = await response.json()
+                        raise Exception(f"Streaming error: Error code: {response.status_code} - {error_detail}")
+                    async for line in response.aiter_lines():
+                        if not line or line == "data: [DONE]":
+                            continue
+                        if not line.startswith("data: "):
+                            continue
+                            
+                        try:
+                            event = json.loads(line[6:])  # Skip "data: " prefix
+                            if not isinstance(event, dict):
+                                continue
+                                
+                            event_type = event.get("type")
+                            event_data = event.get("data")
+                            
+                            if not event_type or event_data is None:
+                                continue
+                                
+                            match event_type:
+                                case "token":
+                                    if stream_tokens:
+                                        yield str(event_data)
+                                case "message":
+                                    # Ensure message data has type field
+                                    if "type" not in event_data:
+                                        if "role" in event_data:
+                                            if event_data["role"] == "assistant":
+                                                event_data["type"] = "ai"
+                                            elif event_data["role"] == "user":
+                                                event_data["type"] = "human"
+                                            else:
+                                                event_data["type"] = event_data["role"]
+                                    yield ChatMessage(**event_data)
+                                case "error":
+                                    if isinstance(event_data, dict) and "detail" in event_data:
+                                        raise Exception(event_data["detail"])
+                                    raise Exception(str(event_data))
+                        except json.JSONDecodeError as e:
+                            logging.error(f"Failed to decode SSE message: {e}")
+                            continue
+
+        except httpx.HTTPStatusError as e:
+            error_detail = e.response.json()
+            raise Exception(f"Streaming error: {error_detail}")
+        except Exception as e:
+            raise Exception(f"Streaming error: {str(e)}")
 
     async def acreate_feedback(
         self, run_id: str, key: str, score: float, kwargs: dict[str, Any] = {}

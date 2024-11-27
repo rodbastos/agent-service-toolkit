@@ -7,6 +7,12 @@ services:
       - "80:80"
     env_file:
       - .env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=80
+      - MODE=dev
+    volumes:
+      - ./data:/app/data
     develop:
       watch:
         - path: src/agents/
@@ -27,8 +33,11 @@ services:
       - "8501:8501"
     depends_on:
       - agent_service
+    env_file:
+      - .env
     environment:
-      - AGENT_URL=http://agent_service
+      - AGENT_URL=http://agent_service:80
+      - MODE=dev
     develop:
       watch:
         - path: src/client/

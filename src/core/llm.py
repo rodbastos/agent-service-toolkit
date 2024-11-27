@@ -21,14 +21,15 @@ from schema.models import (
 _MODEL_TABLE = {
     OpenAIModelName.GPT_4O_MINI: "gpt-4o-mini",
     OpenAIModelName.GPT_4O: "gpt-4o",
-    AnthropicModelName.HAIKU_3: "claude-3-haiku-20240307",
-    AnthropicModelName.HAIKU_35: "claude-3-5-haiku-latest",
-    AnthropicModelName.SONNET_35: "claude-3-5-sonnet-latest",
+    AnthropicModelName.HAIKU_3: "claude-instant-3-haiku-20240307",
+    AnthropicModelName.HAIKU_35: "claude-instant-3-5-haiku-latest",
+    AnthropicModelName.SONNET_35: "claude-instant-3-5-sonnet-latest",
+    AnthropicModelName.HAIKU_35_20241022: "claude-instant-3-5-haiku-20241022",
     GoogleModelName.GEMINI_15_FLASH: "gemini-1.5-flash",
     GroqModelName.LLAMA_31_8B: "llama-3.1-8b-instant",
     GroqModelName.LLAMA_31_70B: "llama-3.1-70b-versatile",
     GroqModelName.LLAMA_GUARD_3_8B: "llama-guard-3-8b",
-    AWSModelName.BEDROCK_HAIKU: "anthropic.claude-3-5-haiku-20241022-v1:0",
+    AWSModelName.BEDROCK_HAIKU: "anthropic.claude-instant-3-5-haiku-20241022-v1:0",
     FakeModelName.FAKE: "fake",
 }
 

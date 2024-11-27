@@ -74,9 +74,11 @@ async def main() -> None:
         st.session_state.thread_id = thread_id
 
     models = {
+        "Claude 3.5 Haiku (streaming)": AnthropicModelName.HAIKU_35_20241022,
+        "Claude 3 Haiku (streaming)": AnthropicModelName.HAIKU_3,
+        "Claude 3.5 Sonnet (streaming)": AnthropicModelName.SONNET_35,
         "OpenAI GPT-4o-mini (streaming)": OpenAIModelName.GPT_4O_MINI,
         "Gemini 1.5 Flash (streaming)": GoogleModelName.GEMINI_15_FLASH,
-        "Claude 3 Haiku (streaming)": AnthropicModelName.HAIKU_3,
         "llama-3.1-70b on Groq": GroqModelName.LLAMA_31_70B,
         "AWS Bedrock Haiku (streaming)": AWSModelName.BEDROCK_HAIKU,
     }
@@ -86,7 +88,8 @@ async def main() -> None:
         ""
         "Full toolkit for running an AI agent service built with LangGraph, FastAPI and Streamlit"
         with st.popover(":material/settings: Settings", use_container_width=True):
-            m = st.radio("LLM to use", options=models.keys())
+            default_model = "Claude 3.5 Haiku (streaming)"  # Set Claude as default
+            m = st.radio("LLM to use", options=models.keys(), index=list(models.keys()).index(default_model))
             model = models[m]
             agent_client.agent = st.selectbox(
                 "Agent to use",
@@ -130,7 +133,7 @@ async def main() -> None:
     messages: list[ChatMessage] = st.session_state.messages
 
     if len(messages) == 0:
-        WELCOME = "Hello! I'm an AI-powered research assistant with web search and a calculator. I may take a few seconds to boot up when you send your first message. Ask me anything!"
+        WELCOME = "Hello! I'm an AI-powered research assistant with web search capabilities. I may take a few seconds to boot up when you send your first message. Ask me anything!"
         with st.chat_message("ai"):
             st.write(WELCOME)
 
@@ -144,6 +147,7 @@ async def main() -> None:
     # Generate new message if the user provided new input
     if user_input := st.chat_input():
         messages.append(ChatMessage(type="human", content=user_input))
+        st.session_state.messages = messages
         st.chat_message("human").write(user_input)
         if use_streaming:
             stream = agent_client.astream(

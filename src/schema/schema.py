@@ -1,38 +1,36 @@
-from typing import Any, Literal, NotRequired
+from typing import Any, Literal, NotRequired, Optional
 
-from pydantic import BaseModel, Field, SerializeAsAny
+from pydantic import BaseModel, Field, ConfigDict
 from typing_extensions import TypedDict
 
 from schema.models import AllModelEnum
 
 
 class UserInput(BaseModel):
-    """Basic user input for the agent."""
+    """
+    Input for the agent service.
+    """
+    message: str
+    model: Optional[str] = None
+    thread_id: Optional[str] = None
 
-    message: str = Field(
-        description="User input to the agent.",
-        examples=["What is the weather in Tokyo?"],
-    )
-    model: SerializeAsAny[AllModelEnum] | None = Field(
-        title="Model",
-        description="LLM Model to use for the agent.",
-        default="gpt-4o-mini",
-        examples=["gpt-4o-mini", "llama-3.1-70b"],
-    )
-    thread_id: str | None = Field(
-        description="Thread ID to persist and continue a multi-turn conversation.",
-        default=None,
-        examples=["847c6285-8fc9-4560-a83f-4e6285809254"],
-    )
+    class Config:
+        json_schema_extra = {
+            "examples": [
+                {
+                    "message": "Hello!",
+                    "model": "claude-3-haiku-20240307",
+                    "thread_id": None
+                }
+            ]
+        }
 
 
 class StreamInput(UserInput):
-    """User input for streaming the agent's response."""
-
-    stream_tokens: bool = Field(
-        description="Whether to stream LLM tokens to the client.",
-        default=True,
-    )
+    """
+    Input for the streaming endpoint.
+    """
+    stream_tokens: bool = True
 
 
 class ToolCall(TypedDict):

@@ -68,10 +68,19 @@ router = APIRouter(dependencies=[Depends(verify_bearer)])
 def _parse_input(user_input: UserInput) -> tuple[dict[str, Any], UUID]:
     run_id = uuid4()
     thread_id = user_input.thread_id or str(uuid4())
+    
+    # Ensure message is not empty
+    if not user_input.message.strip():
+        raise HTTPException(
+            status_code=400,
+            detail={"type": "error", "error": {"type": "invalid_request_error", "message": "messages: at least one message is required"}},
+        )
+        
     kwargs = {
         "input": {"messages": [HumanMessage(content=user_input.message)]},
         "config": RunnableConfig(
-            configurable={"thread_id": thread_id, "model": user_input.model}, run_id=run_id
+            configurable={"thread_id": thread_id, "model": user_input.model},
+            run_id=run_id
         ),
     }
     return kwargs, run_id
@@ -99,66 +108,54 @@ async def invoke(user_input: UserInput, agent_id: str = DEFAULT_AGENT) -> ChatMe
         raise HTTPException(status_code=500, detail="Unexpected error")
 
 
+def format_sse_message(type_: str, data: Any) -> str:
+    """Format a message for server-sent events."""
+    return f"data: {json.dumps({'type': type_, 'data': data})}\n\n"
+
+
 async def message_generator(
     user_input: StreamInput, agent_id: str = DEFAULT_AGENT
 ) -> AsyncGenerator[str, None]:
     """
     Generate a stream of messages from the agent.
-
     This is the workhorse method for the /stream endpoint.
     """
-    agent: CompiledStateGraph = agents[agent_id]
-    kwargs, run_id = _parse_input(user_input)
+    try:
+        agent: CompiledStateGraph = agents[agent_id]
+        kwargs, run_id = _parse_input(user_input)
 
-    # Process streamed events from the graph and yield messages over the SSE stream.
-    async for event in agent.astream_events(**kwargs, version="v2"):
-        if not event:
-            continue
+        async for event in agent.astream_events(**kwargs, version="v2"):
+            if not event:
+                continue
 
-        new_messages = []
-        # Yield messages written to the graph state after node execution finishes.
-        if (
-            event["event"] == "on_chain_end"
-            # on_chain_end gets called a bunch of times in a graph execution
-            # This filters out everything except for "graph node finished"
-            and any(t.startswith("graph:step:") for t in event.get("tags", []))
-            and "messages" in event["data"]["output"]
-        ):
-            new_messages = event["data"]["output"]["messages"]
-
-        # Also yield intermediate messages from agents.utils.CustomData.adispatch().
-        if event["event"] == "on_custom_event" and "custom_data_dispatch" in event.get("tags", []):
-            new_messages = [event["data"]]
-
-        for message in new_messages:
             try:
-                chat_message = langchain_to_chat_message(message)
-                chat_message.run_id = str(run_id)
+                match event["event"]:
+                    case "on_chat_model_stream":
+                        if user_input.stream_tokens:
+                            content = remove_tool_calls(event["data"]["chunk"].content)
+                            if content:
+                                yield format_sse_message("token", content)
+                    
+                    case "on_chain_end":
+                        if "messages" in event["data"]["output"]:
+                            messages = event["data"]["output"]["messages"]
+                            for message in messages:
+                                try:
+                                    chat_message = langchain_to_chat_message(message)
+                                    chat_message.run_id = str(run_id)
+                                    yield format_sse_message("message", chat_message.model_dump())
+                                except ValueError as e:
+                                    logger.error(f"Error converting message: {e}")
+                                    yield format_sse_message("error", {"detail": str(e)})
             except Exception as e:
-                logger.error(f"Error parsing message: {e}")
-                yield f"data: {json.dumps({'type': 'error', 'content': 'Unexpected error'})}\n\n"
-                continue
-            # LangGraph re-sends the input message, which feels weird, so drop it
-            if chat_message.type == "human" and chat_message.content == user_input.message:
-                continue
-            yield f"data: {json.dumps({'type': 'message', 'content': chat_message.model_dump()})}\n\n"
+                logger.error(f"Error processing event: {e}")
+                yield format_sse_message("error", {"detail": f"Error processing event: {str(e)}"})
 
-        # Yield tokens streamed from LLMs.
-        if (
-            event["event"] == "on_chat_model_stream"
-            and user_input.stream_tokens
-            and "llama_guard" not in event.get("tags", [])
-        ):
-            content = remove_tool_calls(event["data"]["chunk"].content)
-            if content:
-                # Empty content in the context of OpenAI usually means
-                # that the model is asking for a tool to be invoked.
-                # So we only print non-empty content.
-                yield f"data: {json.dumps({'type': 'token', 'content': convert_message_content_to_string(content)})}\n\n"
-            continue
-
-    yield "data: [DONE]\n\n"
-
+        yield format_sse_message("done", "[DONE]")
+    
+    except Exception as e:
+        logger.error(f"Error in message generator: {e}")
+        yield format_sse_message("error", {"detail": str(e)})
 
 def _sse_response_example() -> dict[int, Any]:
     return {
@@ -166,7 +163,7 @@ def _sse_response_example() -> dict[int, Any]:
             "description": "Server Sent Event Response",
             "content": {
                 "text/event-stream": {
-                    "example": "data: {'type': 'token', 'content': 'Hello'}\n\ndata: {'type': 'token', 'content': ' World'}\n\ndata: [DONE]\n\n",
+                    "example": "data: {'type': 'token', 'data': 'Hello'}\n\ndata: {'type': 'token', 'data': ' World'}\n\ndata: [DONE]\n\n",
                     "schema": {"type": "string"},
                 }
             },

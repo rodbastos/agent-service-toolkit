@@ -11,22 +11,18 @@ from langgraph.managed import IsLastStep
 from langgraph.prebuilt import ToolNode
 
 from agents.llama_guard import LlamaGuard, LlamaGuardOutput, SafetyAssessment
-from agents.tools import calculator
+from agents.tools.rag_tool import rag_tool
 from core import get_model, settings
 
 
-class AgentState(MessagesState, total=False):
-    """`total=False` is PEP589 specs.
-
-    documentation: https://typing.readthedocs.io/en/latest/spec/typeddict.html#totality
-    """
-
-    safety: LlamaGuardOutput
-    is_last_step: IsLastStep
+AgentState = MessagesState | dict[Literal["safety", "is_last_step"], LlamaGuardOutput | IsLastStep]
 
 
 web_search = DuckDuckGoSearchResults(name="WebSearch")
-tools = [web_search, calculator]
+tools = [web_search]
+
+# Add RAG tool
+tools.append(rag_tool)
 
 # Add weather tool if API key is set
 # Register for an API key at https://openweathermap.org/api/
@@ -35,16 +31,22 @@ if settings.OPENWEATHERMAP_API_KEY:
 
 current_date = datetime.now().strftime("%B %d, %Y")
 instructions = f"""
-    You are a helpful research assistant with the ability to search the web and use other tools.
-    Today's date is {current_date}.
+    Você é um assistente para Agentes de Mudança e Designer Organizacionais. Você tem acesso a uma base de dados sobre o modelo de contratação chamado qt.k da empresa Corsan. 
+    A data de hoje é {current_date}.
 
-    NOTE: THE USER CAN'T SEE THE TOOL RESPONSE.
+    NOTA: O conteúdo da resposta da Tool não é mostrado ao usuário. 
 
     A few things to remember:
-    - Please include markdown-formatted links to any citations used in your response. Only include one
-    or two citations per response unless more are needed. ONLY USE LINKS RETURNED BY THE TOOLS.
-    - Use calculator tool with numexpr to answer math questions. The user does not understand numexpr,
-      so for the final response, use human readable format - e.g. "300 * 200", not "(300 \\times 200)".
+    - Gere respostas com markdown. Cite narrativas específicas. 
+    - Use the 'rag' tool to query the knowledge base for relevant information. The RAG tool returns information
+      from our narratives and themes collected in interviews with people from the organization.
+      When using the RAG tool:
+      - For simple factual questions, use k=1-2 results
+      - For complex questions requiring multiple perspectives, use k=3-5
+      - For comprehensive questions, use k=5-10
+    - If you need to search the web, use the 'WebSearch' tool
+    - Always summarize and cite the relevant information from tool responses in your own words
+    - Do not include raw tool responses in your messages
     """
 
 
@@ -65,8 +67,39 @@ def format_safety_message(safety: LlamaGuardOutput) -> AIMessage:
 
 
 async def acall_model(state: AgentState, config: RunnableConfig) -> AgentState:
+    # Ensure 'messages' and 'is_last_step' keys exist in state
+    state.setdefault("messages", [])
+    state.setdefault("is_last_step", False)
+    
     m = get_model(config["configurable"].get("model", settings.DEFAULT_MODEL))
     model_runnable = wrap_model(m)
+    
+    # Convert messages to proper format for OpenAI
+    formatted_messages = []
+    last_assistant_message = None
+    
+    for msg in state["messages"]:
+        if hasattr(msg, "role"):
+            if msg.role == "tool":
+                # Skip tool messages - we'll handle them with the preceding assistant message
+                continue
+            elif msg.role == "assistant" and hasattr(msg, "tool_calls") and msg.tool_calls:
+                # Store assistant message with tool calls to pair with subsequent tool messages
+                last_assistant_message = msg
+                formatted_messages.append(msg)
+            elif msg.role == "function":
+                # If we have a preceding assistant message with tool calls, add this as the function response
+                if last_assistant_message and hasattr(last_assistant_message, "tool_calls"):
+                    formatted_messages.append(msg)
+                last_assistant_message = None
+            else:
+                formatted_messages.append(msg)
+        else:
+            formatted_messages.append(msg)
+    
+    # Update state with properly formatted messages
+    state["messages"] = formatted_messages
+    
     response = await model_runnable.ainvoke(state, config)
 
     # Run llama guard check here to avoid returning the message if it's unsafe
@@ -84,6 +117,7 @@ async def acall_model(state: AgentState, config: RunnableConfig) -> AgentState:
                 )
             ]
         }
+    
     # We return a list, because this will get added to the existing list
     return {"messages": [response]}
 
