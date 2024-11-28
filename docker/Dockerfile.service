@@ -16,6 +16,6 @@ COPY src/agents/ ./agents/
 COPY src/core/ ./core/
 COPY src/schema/ ./schema/
 COPY src/service/ ./service/
-COPY src/run_service.py .
+COPY src/run_service.py ./run_service.py
 
 CMD ["python", "run_service.py"]

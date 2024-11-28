@@ -3,7 +3,7 @@ services:
     name: qtk-agent-service
     env: docker
     dockerfilePath: ./docker/Dockerfile.service
-    startCommand: gunicorn run_service:app --bind 0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 120
+    startCommand: cd /app && python run_service.py
     envVars:
       - key: USE_FAKE_MODEL
         value: false
