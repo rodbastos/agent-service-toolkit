@@ -3,13 +3,25 @@ FROM python:3.12.3-slim
 # Set the working directory to match Render's path
 WORKDIR /opt/render/project/src
 
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy the entire project
 COPY . .
 
-# Install uv and dependencies
-RUN pip install --no-cache-dir uv && \
-    uv pip install --system -r requirements.txt --no-deps && \
-    uv pip install --system .
+# Create and activate virtual environment
+RUN python -m venv .venv
+ENV PATH="/opt/render/project/src/.venv/bin:$PATH"
+ENV VIRTUAL_ENV="/opt/render/project/src/.venv"
+
+# Install dependencies
+RUN pip install --no-cache-dir -U pip setuptools wheel && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir langgraph-checkpoint-sqlite && \
+    pip install -e .
 
 # Set environment variables
 ENV PYTHONPATH=/opt/render/project/src:/opt/render/project/src/src
