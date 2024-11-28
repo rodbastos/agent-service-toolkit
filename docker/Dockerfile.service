@@ -1,7 +1,7 @@
 FROM python:3.12.3-slim
 
-# Set the working directory
-WORKDIR /app
+# Set the working directory to match Render's path
+WORKDIR /opt/render/project/src
 
 # Copy the entire project
 COPY . .
@@ -10,7 +10,7 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables
-ENV PYTHONPATH=/app:/app/src
+ENV PYTHONPATH=/opt/render/project/src:/opt/render/project/src/src
 ENV PORT=10000
 ENV HOST=0.0.0.0
 ENV MODE=prod
@@ -21,10 +21,10 @@ RUN echo "Python version:" && python --version && \
     echo "\nPython executable:" && which python && \
     echo "\nPython path:" && python -c "import sys; print('\n'.join(sys.path))" && \
     echo "\nInstalled packages:" && pip list && \
-    echo "\nDirectory structure:" && ls -R /app/src
+    echo "\nDirectory structure:" && ls -R src
 
 # Make sure the port is exposed
 EXPOSE 10000
 
 # Set the default command using gunicorn with uvicorn workers
-CMD ["python", "-m", "gunicorn", "--chdir", "/app/src", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:10000", "--timeout", "120", "--preload", "service.service:app"]
+CMD ["python", "-m", "gunicorn", "--chdir", "src", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:10000", "--timeout", "120", "--preload", "service.service:app"]

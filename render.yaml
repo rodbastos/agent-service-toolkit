@@ -5,7 +5,7 @@ services:
     region: ohio
     plan: free
     dockerfilePath: docker/Dockerfile.service
-    dockerCommand: python -m gunicorn --chdir /app/src --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:10000 --timeout 120 service.service:app
+    dockerCommand: python -m gunicorn --chdir src --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:10000 --timeout 120 --preload service.service:app
     envVars:
       - key: USE_FAKE_MODEL
         value: false
@@ -47,3 +47,5 @@ services:
         sync: false
       - key: EMBEDDINGS_MODEL
         value: embed-multilingual-v3.0
+      - key: PYTHONPATH
+        value: /opt/render/project/src:/opt/render/project/src/src
