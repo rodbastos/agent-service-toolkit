@@ -17,7 +17,10 @@ COPY src/ ./src/
 COPY pyproject.toml .
 COPY uv.lock .
 
+# Debug: List contents of the directory
+RUN ls -R /opt/render/project
+
 EXPOSE 80
 
 # Set the default command
-CMD ["python", "/opt/render/project/src/run_service.py"]
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "service:app"]

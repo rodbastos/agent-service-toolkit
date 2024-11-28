@@ -5,7 +5,7 @@ services:
     region: ohio
     plan: free
     dockerfilePath: docker/Dockerfile.service
-    dockerCommand: python /opt/render/project/src/run_service.py
+    dockerCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker service:app
     envVars:
       - key: USE_FAKE_MODEL
         value: false
