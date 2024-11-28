@@ -5,7 +5,7 @@ services:
     region: ohio
     plan: free
     dockerfilePath: docker/Dockerfile.service
-    dockerCommand: python src/run_service.py
+    dockerCommand: python /opt/render/project/src/run_service.py
     envVars:
       - key: USE_FAKE_MODEL
         value: false

@@ -1,8 +1,8 @@
 FROM python:3.12.3-slim
 
-WORKDIR /app
+WORKDIR /opt/render/project
 
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/opt/render/project
 ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 ENV UV_COMPILE_BYTECODE=1
 
@@ -20,4 +20,4 @@ COPY uv.lock .
 EXPOSE 80
 
 # Set the default command
-CMD ["python", "src/run_service.py"]
+CMD ["python", "/opt/render/project/src/run_service.py"]
