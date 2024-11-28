@@ -5,7 +5,7 @@ services:
     region: ohio
     plan: free
     dockerfilePath: docker/Dockerfile.service
-    dockerCommand: gunicorn service.service:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:80 --timeout 120
+    dockerCommand: python -m gunicorn --chdir /app/src --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:10000 --timeout 120 service.service:app
     envVars:
       - key: USE_FAKE_MODEL
         value: false
@@ -14,7 +14,7 @@ services:
       - key: HOST
         value: 0.0.0.0
       - key: PORT
-        value: 80
+        value: 10000
       - key: MODE
         value: prod
       - key: LOG_LEVEL
