@@ -1,10 +1,11 @@
 services:
   - type: web
     name: qtk-agent-service
-    env: docker
+    runtime: docker
+    region: ohio
+    plan: free
     dockerfilePath: docker/Dockerfile.service
-    buildCommand: docker build -t qtk-agent-service .
-    startCommand: docker run --env-file .env -p $PORT:80 qtk-agent-service
+    dockerCommand: python src/run_service.py
     envVars:
       - key: USE_FAKE_MODEL
         value: false

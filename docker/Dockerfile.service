@@ -2,21 +2,22 @@ FROM python:3.12.3-slim
 
 WORKDIR /app
 
+ENV PYTHONPATH=/app
 ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 ENV UV_COMPILE_BYTECODE=1
 
-COPY pyproject.toml ./
-COPY uv.lock ./
-COPY requirements.txt ./
-RUN pip install --no-cache-dir uv
-RUN uv sync --frozen --no-install-project --no-dev
-RUN uv pip install --system -r requirements.txt
+# Copy requirements first for better caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source code
+# Copy the entire src directory
 COPY src/ ./src/
+
+# Copy other necessary files
+COPY pyproject.toml .
+COPY uv.lock .
 
 EXPOSE 80
 
-ENV PYTHONPATH=/app
-
+# Set the default command
 CMD ["python", "src/run_service.py"]
