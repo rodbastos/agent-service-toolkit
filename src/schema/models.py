@@ -7,7 +7,6 @@ class Provider(StrEnum):
     ANTHROPIC = auto()
     GOOGLE = auto()
     GROQ = auto()
-    AWS = auto()
     FAKE = auto()
 
 
@@ -41,15 +40,8 @@ class GroqModelName(StrEnum):
     LLAMA_GUARD_3_8B = "groq-llama-guard-3-8b"
 
 
-class AWSModelName(StrEnum):
-    """https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"""
-
-    BEDROCK_HAIKU = "bedrock-3.5-haiku"
-
-
 class FakeModelName(StrEnum):
     """Fake model for testing."""
-
     FAKE = "fake"
 
 
@@ -58,6 +50,5 @@ AllModelEnum: TypeAlias = (
     | AnthropicModelName
     | GoogleModelName
     | GroqModelName
-    | AWSModelName
     | FakeModelName
 )
