@@ -7,7 +7,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from schema.models import (
     AllModelEnum,
     AnthropicModelName,
-    AWSModelName,
     FakeModelName,
     GoogleModelName,
     GroqModelName,
@@ -41,7 +40,6 @@ class Settings(BaseSettings):
     GOOGLE_API_KEY: SecretStr | None = None
     GROQ_API_KEY: SecretStr | None = None
     COHERE_API_KEY: SecretStr | None = None
-    USE_AWS_BEDROCK: bool = False
     USE_FAKE_MODEL: bool = False
 
     # Pinecone settings
@@ -71,7 +69,6 @@ class Settings(BaseSettings):
             Provider.ANTHROPIC: self.ANTHROPIC_API_KEY,
             Provider.GOOGLE: self.GOOGLE_API_KEY,
             Provider.GROQ: self.GROQ_API_KEY,
-            Provider.AWS: self.USE_AWS_BEDROCK,
             Provider.FAKE: self.USE_FAKE_MODEL,
         }
         active_keys = {k for k, v in api_keys.items() if v}
@@ -89,8 +86,6 @@ class Settings(BaseSettings):
                     self.DEFAULT_MODEL = GoogleModelName.GEMINI_15_FLASH
                 case Provider.GROQ:
                     self.DEFAULT_MODEL = GroqModelName.LLAMA_31_8B
-                case Provider.AWS:
-                    self.DEFAULT_MODEL = AWSModelName.BEDROCK_HAIKU
                 case Provider.FAKE:
                     self.DEFAULT_MODEL = FakeModelName.FAKE
                 case _:

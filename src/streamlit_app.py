@@ -10,7 +10,6 @@ from client import AgentClient
 from schema import ChatHistory, ChatMessage
 from schema.models import (
     AnthropicModelName,
-    AWSModelName,
     GoogleModelName,
     GroqModelName,
     OpenAIModelName,
@@ -78,7 +77,6 @@ async def main() -> None:
         "Gemini 1.5 Flash (streaming)": GoogleModelName.GEMINI_15_FLASH,
         "Claude 3 Haiku (streaming)": AnthropicModelName.HAIKU_3,
         "llama-3.1-70b on Groq": GroqModelName.LLAMA_31_70B,
-        "AWS Bedrock Haiku (streaming)": AWSModelName.BEDROCK_HAIKU,
     }
     # Config options
     with st.sidebar:
