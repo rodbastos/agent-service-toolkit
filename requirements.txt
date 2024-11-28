@@ -2,24 +2,26 @@
 # to Streamlit Community Cloud, since it doesn't have support for uv.
 # USE PYPROJECT.TOML AND UV.LOCK FOR YOUR OWN INSTALL!
 
+duckduckgo-search>=6.3.6
+fastapi~=0.115.5
 httpx~=0.27.2
-pydantic ~=2.10.1
-pydantic-settings>=2.1.0
+langchain-core~=0.3.20
+langchain-community~=0.3.7
+langchain-openai~=0.2.9
+langchain-anthropic~=0.3.0
+langchain-google-genai~=2.0.5
+langchain-groq~=0.2.1
+langgraph~=0.2.53
+langgraph-checkpoint-sqlite~=2.0.1
+langsmith~=0.1.145
+numexpr~=2.10.1
+pyarrow>=18.1.0
+pydantic~=2.10.1
+pydantic-settings~=2.6.1
+pyowm~=3.3.0
+python-dotenv~=1.0.1
+setuptools~=75.6.0
 streamlit~=1.40.1
-numexpr>=2.8.8
-cohere>=5.0.0  # Required for v2 API support
-pinecone-client>=3.0.0
-langchain>=0.1.0
-langchain-core>=0.1.0
-langchain-openai>=0.0.2
-langchain-google-genai>=0.0.6
-langchain-anthropic>=0.1.1
-langchain-groq>=0.0.1
-langchain-community>=0.0.13
-langsmith>=0.0.75
-langgraph>=0.1.0
-langgraph-checkpoint-sqlite>=2.0.1  # SQLite checkpoint implementation
-fastapi>=0.109.0
-uvicorn>=0.27.0
+tiktoken>=0.8.0
+uvicorn~=0.32.1
 gunicorn>=21.2.0
-python-dotenv>=1.0.0
