@@ -44,7 +44,7 @@ class Settings(BaseSettings):
 
     # Pinecone settings
     PINECONE_API_KEY: SecretStr | None = None
-    PINECONE_ENVIRONMENT: str = "us-east-1"  # AWS region for serverless
+    PINECONE_ENVIRONMENT: str = "us-east-1"  # Serverless deployment region
     PINECONE_INDEX: str = "qtk"  # Index name
 
     # Cohere Embeddings settings
