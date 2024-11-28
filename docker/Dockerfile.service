@@ -1,27 +1,26 @@
 FROM python:3.12.3-slim
 
 # Set the working directory
-WORKDIR /opt/render/project/src
+WORKDIR /opt/render/project
 
-# Copy only necessary files first
-COPY requirements.txt .
-COPY pyproject.toml .
-COPY uv.lock .
-
-# Install dependencies
+# Copy requirements and install dependencies
+COPY requirements.txt pyproject.toml uv.lock ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the source code
-COPY src/ .
-
-# Debug: Print working directory and list contents
-RUN pwd && ls -la
+# Copy the src directory maintaining structure
+COPY src ./src
 
 # Set environment variables
-ENV PYTHONPATH=/opt/render/project/src
+ENV PYTHONPATH=/opt/render/project
 ENV PORT=80
+
+# Debug: Print directory structure
+RUN echo "Current directory:" && pwd && \
+    echo "\nContents of current directory:" && ls -la && \
+    echo "\nContents of src directory:" && ls -la src && \
+    echo "\nContents of src/service directory:" && ls -la src/service
 
 EXPOSE 80
 
-# Set the default command with module path
-CMD ["gunicorn", "service.service:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:80", "--pythonpath", "/opt/render/project/src"]
+# Set the default command
+CMD ["gunicorn", "--pythonpath", "/opt/render/project/src", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:80", "service:app"]
