@@ -1,26 +1,20 @@
 FROM python:3.12.3-slim
 
-WORKDIR /opt/render/project
+# Set the working directory to the src folder
+WORKDIR /opt/render/project/src
 
-ENV PYTHONPATH=/opt/render/project
+# Set Python path to include the current directory
+ENV PYTHONPATH=/opt/render/project/src:$PYTHONPATH
 ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 ENV UV_COMPILE_BYTECODE=1
 
-# Copy requirements first for better caching
-COPY requirements.txt .
+# Copy the entire project
+COPY . /opt/render/project/src/
+
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the entire src directory
-COPY src/ ./src/
-
-# Copy other necessary files
-COPY pyproject.toml .
-COPY uv.lock .
-
-# Debug: List contents of the directory
-RUN ls -R /opt/render/project
 
 EXPOSE 80
 
-# Set the default command
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "service:app"]
+# Set the default command with the correct module path
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "service.service:app"]
