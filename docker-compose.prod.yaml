@@ -1,0 +1,13 @@
+services:
+  agent_service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.service
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=80
+      - MODE=prod

@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: qtk-agent-service
+    env: docker
+    dockerfilePath: ./docker/Dockerfile.service
+    startCommand: gunicorn run_service:app --bind 0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 120
+    envVars:
+      - key: USE_FAKE_MODEL
+        value: false
+      - key: DEFAULT_MODEL
+        value: claude-3-haiku
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 80
+      - key: MODE
+        value: prod
+      - key: LOG_LEVEL
+        value: info
+      - key: TEMPERATURE_FIELD
+        value: temperature
+      - key: ABSTRACTION_FIELD
+        value: abstraction
+      - key: CLUSTER_FIELD
+        value: cluster
+      - key: EMBEDDINGS_INPUT_TYPE
+        value: search_query
+      - key: LANGCHAIN_TRACING_V2
+        value: true
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: LANGCHAIN_PROJECT
+        sync: false
+      - key: LANGCHAIN_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_ENVIRONMENT
+        sync: false
+      - key: PINECONE_INDEX
+        sync: false
+      - key: COHERE_API_KEY
+        sync: false
+      - key: EMBEDDINGS_MODEL
+        value: embed-multilingual-v3.0
