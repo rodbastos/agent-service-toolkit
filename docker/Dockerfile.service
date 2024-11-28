@@ -1,18 +1,18 @@
 FROM python:3.12.3-slim
 
 # Set the working directory
-WORKDIR /opt/render/project
+WORKDIR /app
 
-# Copy requirements and install dependencies
-COPY requirements.txt pyproject.toml uv.lock ./
+# Copy the entire project
+COPY . .
+
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the src directory maintaining structure
-COPY src ./src
-
 # Set environment variables
-ENV PYTHONPATH=/opt/render/project
+ENV PYTHONPATH=/app/src
 ENV PORT=80
+ENV HOST=0.0.0.0
 
 # Debug: Print directory structure
 RUN echo "Current directory:" && pwd && \
@@ -22,5 +22,8 @@ RUN echo "Current directory:" && pwd && \
 
 EXPOSE 80
 
+# Change to src directory
+WORKDIR /app/src
+
 # Set the default command
-CMD ["gunicorn", "--pythonpath", "/opt/render/project/src", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:80", "service:app"]
+CMD ["uvicorn", "service:app", "--host", "0.0.0.0", "--port", "80", "--workers", "4"]
