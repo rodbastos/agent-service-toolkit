@@ -28,8 +28,8 @@ from schema.task_data import TaskData, TaskDataStatus
 # The app heavily uses AgentClient to interact with the agent's FastAPI endpoints.
 
 
-APP_TITLE = "Agent Service Toolkit"
-APP_ICON = "🧰"
+APP_TITLE = "QTK Research Assistant"
+APP_ICON = "🔍"
 
 
 async def main() -> None:
@@ -84,53 +84,56 @@ async def main() -> None:
     with st.sidebar:
         st.header(f"{APP_ICON} {APP_TITLE}")
         ""
-        "Full toolkit for running an AI agent service built with LangGraph, FastAPI and Streamlit"
+        "Assistente especializado em analisar narrativas dos colaboradores da Corsan sobre o modelo QTK."
+        "Explore temas, análise sentimentos e descubra padrões nas narrativas."
         with st.popover(":material/settings: Settings", use_container_width=True):
             m = st.radio("LLM to use", options=models.keys())
             model = models[m]
-            agent_client.agent = st.selectbox(
-                "Agent to use",
-                options=[
-                    "research-assistant",
-                    "chatbot",
-                    "bg-task-agent",
-                ],
-            )
+            agent_client.agent = "research-assistant"  
             use_streaming = st.toggle("Stream results", value=True)
 
-        @st.dialog("Architecture")
-        def architecture_dialog() -> None:
-            st.image(
-                "https://github.com/JoshuaC215/agent-service-toolkit/blob/main/media/agent_architecture.png?raw=true"
-            )
-            "[View full size on Github](https://github.com/JoshuaC215/agent-service-toolkit/blob/main/media/agent_architecture.png)"
-            st.caption(
-                "App hosted on [Streamlit Cloud](https://share.streamlit.io/) with FastAPI service running in [Azure](https://learn.microsoft.com/en-us/azure/app-service/)"
-            )
+        @st.dialog("Sobre o QTK")
+        def about_dialog() -> None:
+            st.write("""
+            ### Sobre o Assistente QTK
+            
+            Este assistente é especializado em analisar narrativas sobre o modelo de contratação QTK da Corsan.
+            
+            **Recursos:**
+            - Busca por temas específicos (C0-C13)
+            - Análise de contexto emocional (temperatura -4 a 4)
+            - Avaliação de níveis de abstração (1 a 4)
+            - Descoberta de padrões e conexões entre narrativas
+            
+            **Monitoramento:**
+            Todas as interações são monitoradas via LangSmith para garantir qualidade e melhorias contínuas.
+            """)
 
-        if st.button(":material/schema: Architecture", use_container_width=True):
-            architecture_dialog()
-
-        with st.popover(":material/policy: Privacy", use_container_width=True):
-            st.write(
-                "Prompts, responses and feedback in this app are anonymously recorded and saved to LangSmith for product evaluation and improvement purposes only."
-            )
+        if st.button(":material/info: Sobre o QTK", use_container_width=True):
+            about_dialog()
 
         st.markdown(
-            f"Thread ID: **{st.session_state.thread_id}**",
-            help=f"Set URL query parameter ?thread_id={st.session_state.thread_id} to continue this conversation",
+            f"ID da Conversa: **{st.session_state.thread_id}**",
+            help=f"Use ?thread_id={st.session_state.thread_id} na URL para continuar esta conversa",
         )
 
-        "[View the source code](https://github.com/JoshuaC215/agent-service-toolkit)"
         st.caption(
-            "Made with :material/favorite: by [Joshua](https://www.linkedin.com/in/joshua-k-carroll/) in Oakland"
+            "Desenvolvido com 💙 pela equipe de IA da TT"
         )
 
     # Draw existing messages
     messages: list[ChatMessage] = st.session_state.messages
 
     if len(messages) == 0:
-        WELCOME = "Hello! I'm an AI-powered research assistant with web search and a calculator. I may take a few seconds to boot up when you send your first message. Ask me anything!"
+        WELCOME = """Olá! Sou um assistente de pesquisa especializado em analisar narrativas dos colaboradores da Corsan sobre o modelo QTK.
+
+Posso ajudar você a:
+- Buscar narrativas específicas por tema (C0-C13)
+- Analisar o contexto emocional (temperatura -4 a 4)
+- Avaliar o nível de abstração das narrativas (1 a 4)
+- Relacionar diferentes temas e perspectivas
+
+Como posso ajudar você hoje?"""
         with st.chat_message("ai"):
             st.write(WELCOME)
 

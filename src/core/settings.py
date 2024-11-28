@@ -40,8 +40,18 @@ class Settings(BaseSettings):
     ANTHROPIC_API_KEY: SecretStr | None = None
     GOOGLE_API_KEY: SecretStr | None = None
     GROQ_API_KEY: SecretStr | None = None
+    COHERE_API_KEY: SecretStr | None = None
     USE_AWS_BEDROCK: bool = False
     USE_FAKE_MODEL: bool = False
+
+    # Pinecone settings
+    PINECONE_API_KEY: SecretStr | None = None
+    PINECONE_ENVIRONMENT: str = "us-east-1"  # AWS region for serverless
+    PINECONE_INDEX: str = "qtk"  # Index name
+
+    # Cohere Embeddings settings
+    EMBEDDINGS_MODEL: str = "embed-multilingual-v3.0"
+    EMBEDDINGS_INPUT_TYPE: str = "search_query"
 
     # If DEFAULT_MODEL is None, it will be set in model_post_init
     DEFAULT_MODEL: AllModelEnum | None = None  # type: ignore[assignment]
