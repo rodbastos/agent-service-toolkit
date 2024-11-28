@@ -14,11 +14,13 @@ ENV PYTHONPATH=/app/src
 ENV PORT=80
 ENV HOST=0.0.0.0
 
-# Debug: Print directory structure
+# Debug: Print directory structure and file permissions
 RUN echo "Current directory:" && pwd && \
     echo "\nContents of current directory:" && ls -la && \
     echo "\nContents of src directory:" && ls -la src && \
-    echo "\nContents of src/service directory:" && ls -la src/service
+    echo "\nContents of src/service directory:" && ls -la src/service && \
+    echo "\nPython path:" && python -c "import sys; print('\n'.join(sys.path))" && \
+    echo "\nTry importing service:" && python -c "import service; print(service.__file__)"
 
 EXPOSE 80
 
@@ -26,4 +28,4 @@ EXPOSE 80
 WORKDIR /app/src
 
 # Set the default command
-CMD ["uvicorn", "service:app", "--host", "0.0.0.0", "--port", "80", "--workers", "4"]
+CMD ["python", "-m", "uvicorn", "service.service:app", "--host", "0.0.0.0", "--port", "80", "--workers", "4"]
