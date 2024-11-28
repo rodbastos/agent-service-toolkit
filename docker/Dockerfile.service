@@ -6,31 +6,27 @@ WORKDIR /app
 # Copy the entire project
 COPY . .
 
-# Create and activate virtual environment
-RUN python -m venv /app/venv
-ENV PATH="/app/venv/bin:$PATH"
-ENV VIRTUAL_ENV="/app/venv"
-
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables
-ENV PYTHONPATH=/app:/app/src
+ENV PYTHONPATH=/app/src
 ENV PORT=80
 ENV HOST=0.0.0.0
+ENV MODE=prod
+ENV LOG_LEVEL=info
 
 # Debug: Print environment information
 RUN echo "Python version:" && python --version && \
     echo "\nPython executable:" && which python && \
-    echo "\nVirtual env:" && echo $VIRTUAL_ENV && \
     echo "\nPython path:" && python -c "import sys; print('\n'.join(sys.path))" && \
     echo "\nInstalled packages:" && pip list && \
-    echo "\nDirectory structure:" && ls -R /app
+    echo "\nDirectory structure:" && ls -R /app/src
 
 EXPOSE 80
 
 # Change to src directory
 WORKDIR /app/src
 
-# Set the default command
-CMD ["python", "-c", "import uvicorn; import service.service; uvicorn.run('service.service:app', host='0.0.0.0', port=80, workers=4)"]
+# Set the default command using gunicorn with uvicorn workers
+CMD ["gunicorn", "service.service:app", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:80", "--timeout", "120"]
