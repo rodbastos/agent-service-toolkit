@@ -6,8 +6,10 @@ WORKDIR /opt/render/project/src
 # Copy the entire project
 COPY . .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install uv and dependencies
+RUN pip install --no-cache-dir uv && \
+    uv pip install --system -r requirements.txt --no-deps && \
+    uv pip install --system .
 
 # Set environment variables
 ENV PYTHONPATH=/opt/render/project/src:/opt/render/project/src/src
