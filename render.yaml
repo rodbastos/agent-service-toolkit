@@ -5,7 +5,7 @@ services:
     region: ohio
     plan: free
     dockerfilePath: docker/Dockerfile.service
-    dockerCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker service.service:app
+    dockerCommand: gunicorn --chdir /app/src -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:80 service.service:app
     envVars:
       - key: USE_FAKE_MODEL
         value: false
