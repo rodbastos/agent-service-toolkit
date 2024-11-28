@@ -25,7 +25,6 @@ dependencies = [
     "langchain-anthropic ~= 0.3.0",
     "langchain-google-genai ~=2.0.5",
     "langchain-groq ~=0.2.1",
-    "langchain-aws ~=0.2.7",
     "langgraph ~=0.2.53",
     "langgraph-checkpoint-sqlite ~=2.0.1",
     "langsmith ~=0.1.145",
